@@ -17,15 +17,18 @@ import java.io.FileWriter;
 public class Principal {
 	
 	static ArrayList<Carta> maos = new ArrayList<>();
-	static File file = new File("pokerK.txt");
+	static File file = new File("pokerM.txt");
 	
-	public static int encontrarMaior(Carta carta1, Carta carta2){
-		if(carta1.compareTo(carta2)<0){
-			return 2;
-		}else if(carta1.compareTo(carta2)>0){
-			return 1;
-		}
-		return 0;
+	public static int encontrarMaior(Mao mao1, Mao mao2){
+	 for (int i=4; i<5;i--){
+		 if(mao1.getMao().get(i).compareTo(mao2.getMao().get(i))<0){
+				return 2;
+			}else if(mao1.getMao().get(i).compareTo(mao2.getMao().get(i))>0){
+				return 1;
+			}
+	 	}
+	 	return 0;
+		
 	}
 	
 	public static int verificarGanhador (Mao mao1, Mao mao2){
@@ -42,7 +45,7 @@ public class Principal {
 			switch (mao1.getRanking().ordinal()+1) {
 			//Maior carta
 			case 1:
-				return encontrarMaior(mao1.getHighCard(), mao2.getHighCard());
+				return encontrarMaior(mao1, mao2);
 							
 			//Um par	
 			case 2:
@@ -53,7 +56,7 @@ public class Principal {
 					return 2;
 				}
 				else{
-					return encontrarMaior(mao1.getHighCard(), mao2.getHighCard());
+					return encontrarMaior(mao1, mao2);
 				}
 				
 			//Dois pares	
@@ -65,7 +68,7 @@ public class Principal {
 					return 2;
 				}
 				else{
-					return encontrarMaior(mao1.getHighCard(), mao2.getHighCard());
+					return encontrarMaior(mao1, mao2);
 				}
 
 			
@@ -77,17 +80,17 @@ public class Principal {
 				else if (mao1.getValor_repeticao1() < mao2.getValor_repeticao1()) {
 					return 2;
 				}else{
-					return encontrarMaior(mao1.getHighCard(), mao2.getHighCard());
+					return encontrarMaior(mao1, mao2);
 				}
 
 			
 			//Straight
 			case 5:
-				return encontrarMaior(mao1.getHighCard(), mao2.getHighCard());
+				return encontrarMaior(mao1, mao2);
 					
 			//Flush
 			case 6:
-				return encontrarMaior(mao1.getHighCard(), mao2.getHighCard());
+				return encontrarMaior(mao1, mao2);
 			
 			//Full House	
 			case 7:
@@ -103,15 +106,26 @@ public class Principal {
 				else if (mao1.getValor_repeticao2() < mao2.getValor_repeticao2()) {
 					return 2;
 				}
-				break;
+				else{
+					return encontrarMaior(mao1, mao2);
+				}
 			
 			//Uma quadra.
 			case 8:
-				return encontrarMaior(mao1.getHighCard(), mao2.getHighCard());
+				if (mao1.getValor_repeticao1() > mao2.getValor_repeticao1()) {
+					return 1;
+				}
+				else if (mao1.getValor_repeticao1() < mao2.getValor_repeticao1()) {
+					return 2;
+				}
+				else{
+					return encontrarMaior(mao1, mao2);
+				}
+				
 			
 			//Straight Flush
 			case 9:
-				return encontrarMaior(mao1.getHighCard(), mao2.getHighCard());
+				return encontrarMaior(mao1, mao2);
 			
 			//Royal Flush
 			case 10:
