@@ -16,7 +16,6 @@ import java.io.FileWriter;
 
 public class Principal {
 	
-	static ArrayList<Carta> maos = new ArrayList<>();
 	static File file = new File("pokerM.txt");
 	
 	public static int encontrarMaior(Mao mao1, Mao mao2){
@@ -67,6 +66,12 @@ public class Principal {
 				else if (mao1.getValor_repeticao2() < mao2.getValor_repeticao2()) {
 					return 2;
 				}
+				else if (mao1.getValor_repeticao1() > mao2.getValor_repeticao1()) {
+					return 1;
+				}
+				else if (mao1.getValor_repeticao1() < mao2.getValor_repeticao1()) {
+					return 2;
+				}
 				else{
 					return encontrarMaior(mao1, mao2);
 				}
@@ -94,16 +99,16 @@ public class Principal {
 			
 			//Full House	
 			case 7:
-				if (mao1.getValor_repeticao1() > mao2.getValor_repeticao1()) {
-					return 1;
-				}
-				else if (mao1.getValor_repeticao1() < mao2.getValor_repeticao1()) {
-					return 2;
-				}
 				if (mao1.getValor_repeticao2() > mao2.getValor_repeticao2()) {
 					return 1;
 				}
 				else if (mao1.getValor_repeticao2() < mao2.getValor_repeticao2()) {
+					return 2;
+				}
+				else if (mao1.getValor_repeticao1() > mao2.getValor_repeticao1()) {
+					return 1;
+				}
+				else if (mao1.getValor_repeticao1() < mao2.getValor_repeticao1()) {
 					return 2;
 				}
 				else{
